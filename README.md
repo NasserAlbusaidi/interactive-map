@@ -32,15 +32,11 @@ If you want to clone the project from GitHub, you'll need Git. If you prefer to 
 
 ### Step 4: Get the Project
 
-#### Option A: Clone from GitHub (requires Git)
+####  Clone from GitHub (requires Git)
 
 1. Open Command Prompt and navigate to the folder where you want the project (e.g., `cd C:\xampp\htdocs`).
 2. Clone the project by running `git clone https://github.com/NasserAlbusaidi/interactive-map.git`.
 
-#### Option B: Download Directly
-
-1. Download the project as a ZIP file from GitHub.
-2. Extract the ZIP file to your desired location (e.g., `C:\xampp\htdocs`).
 
 ### Step 5: Install Project Dependencies
 
