@@ -47,17 +47,13 @@ If you want to clone the project from GitHub, you'll need Git. If you prefer to 
 1. Open Command Prompt and navigate to the project folder (e.g., `cd C:\xampp\htdocs\yourproject`).
 2. Run `composer install` to install the required dependencies.
 
-### Step 6: Configure Environment
 
-1. Rename the `.env.example` file to `.env`.
-2. Open the `.env` file and configure your database settings (e.g., DB_HOST, DB_DATABASE, etc.) to match your XAMPP MySQL settings.
-
-### Step 7: Set Up Database
+### Step 6: Set Up Database
 
 1. Open Command Prompt and navigate to the project folder.
 2. Run `php artisan migrate` to create the necessary database tables.
 
-### Step 8: Start the Project
+### Step 7: Start the Project
 
 1. Run `php artisan serve` to start the local development server.
 2. Open your web browser and navigate to [http://127.0.0.1:8000](http://127.0.0.1:8000) to view the project.
