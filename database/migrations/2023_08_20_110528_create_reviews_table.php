@@ -11,6 +11,7 @@ class CreateReviewsTable extends Migration
         Schema::create('reviews', function (Blueprint $table) {
             $table->id();
             $table->foreignId('bathroom_id')->constrained();
+            $table->foreignId('user_id')->constrained();
             $table->string('author');
             $table->text('text');
             $table->integer('rating')->nullable();

@@ -31,13 +31,25 @@
     <div class="px-4 py-2 border-t">
         <div class="flex items-center justify-between mb-2">
             <h4 class="text-md font-extrabold">Reviews</h4>
+            @if ($averageRating > 0)
             <div class="flex items-center">
+
                 @for ($i = 1; $i <= 5; $i++)
-                    <i class="fas fa-star text-yellow-400 {{ $averageRating >= $i ? '' : 'text-gray-300' }}"></i>
+                <i class="fas fa-star text-yellow-400 {{ $averageRating >= $i ? '' : 'text-gray-300' }}"></i>
                 @endfor
                 <span class="text-sm ml-2 font-bold">{{ $averageRating }}/5</span>
             </div>
+            @else
+            <div class="flex items-center">
+                <i class="fas fa-star text-gray-300"></i>
+            </div>
+            @endif
         </div>
+        {{-- {{$bathroomId}} --}}
+
+
+        @livewire('add-review', ['bathroomId' => $bathroomId])
+
         @if ($reviews)
             <div>
                 @foreach ($reviews as $review)
@@ -49,6 +61,7 @@
                                     @if ($i <= floor($review['rating']))
                                         <i class="fas fa-star text-yellow-400"></i> <!-- Full star -->
                                     @elseif ($review['rating'] > $i - 1 && $review['rating'] < $i)
+
                                         <i class="fas fa-star-half-alt text-yellow-400"></i> <!-- Half star -->
                                     @else
                                         <i class="far fa-star text-yellow-400"></i> <!-- Empty star -->
@@ -57,16 +70,30 @@
                                 <p class="text-xs ml-2 text-gray-600">{{ $review['rating'] }}.0</p>
                             </div>
                         </div>
+                        @php
+                        $votes = $this->getVotes($review['id']);
+                    @endphp
+                    <div class="flex items-center">
+                        <button wire:click="voteReview({{ $review['id'] }}, true)">
+                            <i class="fas fa-thumbs-up text-green-500"></i>
+                        </button>
+                        <span class="text-xs mx-1">{{ $votes['upvotes'] }}</span>
+                        <button wire:click="voteReview({{ $review['id'] }}, false)">
+                            <i class="fas fa-thumbs-down text-red-500"></i>
+                        </button>
+                        <span class="text-xs mx-1">{{ $votes['downvotes'] }}</span>
+                    </div>
+
+                    <div>
                         <p class="text-xs">{{ $review['text'] }}</p>
                         <span class="text-xs text-gray-500">{{ $review['date'] }}</span>
                     </div>
                 @endforeach
             </div>
+            @else
+            <p class="text-xs">No reviews yet.</p>
         @endif
     </div>
 
 </div>
 
-<script>
-    console.log('Bathroom details component loaded.');
-</script>

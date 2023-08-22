@@ -20,7 +20,7 @@ class ReviewsTableSeeder extends Seeder
                 'author' => 'John Doe',
                 'rating' => 5,
                 'text' => 'This is a test review',
-
+                'user_id' => 1, // This is the user id of the user who created the review
                 'date' => now(),
             ),
             1 =>
@@ -29,7 +29,7 @@ class ReviewsTableSeeder extends Seeder
                 'author' => 'Jane Doe',
                 'rating' => 4,
                 'text' => 'This is another test review',
-
+                'user_id' => 2, // This is the user id of the user who created the review
                 'date' => now(),
             ),
             2 =>
@@ -38,7 +38,7 @@ class ReviewsTableSeeder extends Seeder
                 'author' => 'John Doe',
                 'rating' => 5,
                 'text' => 'This is a test review',
-
+                'user_id' => 1, // This is the user id of the user who created the review
                 'date' => now(),
             ),
             3 =>
@@ -47,7 +47,7 @@ class ReviewsTableSeeder extends Seeder
                 'author' => 'Jane Doe',
                 'rating' => 4,
                 'text' => 'This is another test review',
-
+                'user_id' => 2, // This is the user id of the user who created the review
                 'date' => now(),
             ),
             4 =>
@@ -56,7 +56,7 @@ class ReviewsTableSeeder extends Seeder
                 'author' => 'John Doe',
                 'rating' => 5,
                 'text' => 'This is a test review',
-
+                'user_id' => 1, // This is the user id of the user who created the review
                 'date' => now(),
             ),
             5 =>
@@ -65,7 +65,7 @@ class ReviewsTableSeeder extends Seeder
                 'author' => 'Jane Doe',
                 'rating' => 1,
                 'text' => 'i dont like this bathroom',
-
+                'user_id' => 2, // This is the user id of the user who created the review
                 'date' => now(),
             ),
             6 =>
@@ -74,6 +74,7 @@ class ReviewsTableSeeder extends Seeder
                 'author' => 'John Doe',
                 'rating' => 5,
                 'text' => 'Trip to the bathroom was great',
+                'user_id' => 1, // This is the user id of the user who created the review
                 'date' => now(),
             ),
             7 =>
@@ -82,7 +83,7 @@ class ReviewsTableSeeder extends Seeder
                 'author' => 'Jane Doe',
                 'rating' => 4,
                 'text' => 'i love this bathroom',
-
+                'user_id' => 2, // This is the user id of the user who created the review
                 'date' => now(),
             ),
        )

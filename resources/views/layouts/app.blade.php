@@ -14,6 +14,8 @@
     @livewireScripts
 </head>
 <body>
+    @include('header')
+
     <div id="app">
         @yield('content')
     </div>
