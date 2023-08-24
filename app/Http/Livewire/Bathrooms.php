@@ -20,8 +20,8 @@ class Bathrooms extends Component
     }
 
     public function markerClicked($bathroomId)
-{
-    $bathroom = $this->bathrooms->firstWhere('id', $bathroomId);
-    $this->emit('showBathroomDetails', $bathroom);
-}
+    {
+        $bathroom = $this->bathrooms->firstWhere('id', $bathroomId);
+        $this->emit('showBathroomDetails', $bathroom->id); // Emitting bathroom ID
+    }
 }

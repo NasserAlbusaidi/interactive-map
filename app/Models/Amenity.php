@@ -15,6 +15,10 @@ class Amenity extends Model
     {
         return $this->belongsToMany(Bathroom::class, 'bathroom_amenity'); // Adjust the table name if it's different
     }
+    public function amenities()
+{
+    return $this->belongsToMany(Amenity::class);
+}
 
     public function getIconAttribute()
     {

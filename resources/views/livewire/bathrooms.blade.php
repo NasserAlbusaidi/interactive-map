@@ -9,18 +9,12 @@
     console.log(bathroomsData);
     // Loop through the data and create markers
     bathroomsData.forEach(function(bathroom) {
-        L.marker([bathroom.latitude, bathroom.longitude], {icon: bathroomIcon})
-            .addTo(map)
-            .on('click', function() {
-                Livewire.emit('showBathroomDetails', {
-                    'id': bathroom.id,
-                    'name': bathroom.name,
-                    'address': bathroom.address,
-                    'image': bathroom.image,
-                    'reviews': bathroom.reviews,
-                    'amenities': bathroom.amenities
-                });
-                toggleSidebar();
-            });
-    });
+    L.marker([bathroom.latitude, bathroom.longitude], {icon: bathroomIcon})
+        .addTo(map)
+        .on('click', function() {
+            Livewire.emit('showBathroomDetails', bathroom.id); // Emitting bathroom ID
+            toggleSidebar();
+        });
+});
+
 </script>

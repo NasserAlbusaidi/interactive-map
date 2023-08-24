@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Amenity;
+use App\Models\Bathroom;
 use App\Models\Review;
 use App\Models\ReviewVotes;
 use Livewire\Component;
@@ -20,8 +21,9 @@ class BathroomDetails extends Component
     public $amenityIcons = [];
     public $upvote;
     public $downvote;
+    public $amenityRatings;
+    protected $listeners = ['showBathroomDetails' => 'updateDetails', 'reviewAdded' => 'refreshReviews'];
 
-    protected $listeners = ['showBathroomDetails' => 'updateDetails'];
 
     public function render()
     {
@@ -29,23 +31,22 @@ class BathroomDetails extends Component
         return view('livewire.bathroom-details');
     }
 
-    public function updateDetails($bathroom)
+    public function updateDetails($bathroomId)
     {
-        $this->name = $bathroom['name'];
-        $this->address = $bathroom['address'];
-        $this->image = $bathroom['image'] ?? null;
-        $this->reviews = Review::where('bathroom_id', $bathroom['id'])->get();
-
-
-
+        $bathroom = Bathroom::with('amenities', 'reviews', 'images')->find($bathroomId);
+        $this->bathroomId = $bathroom->id;
+        $this->name = $bathroom->name;
+        $this->address = $bathroom->address;
+        $this->image = $bathroom->image;
+        $this->reviews = $bathroom->reviews;
         $this->amenityIcons = Amenity::all()->pluck('icon', 'name')->toArray();
         $this->amenities = collect($bathroom['amenities'])->map(function ($amenity) {
             $amenity['icon'] = strtolower($this->amenityIcons[$amenity['name']]) ?? 'fas fa-question';
             return $amenity;
         });
+        $this->amenityRatings = $bathroom->amenities->pluck('rating', 'name')->toArray();
         $this->averageRating = $this->calculateAverageRating();
         $this->dispatchBrowserEvent('toggleSidebar');
-        $this->emit('showBathroomDetails', $bathroom);
     }
 
     public function calculateAverageRating()
@@ -53,7 +54,7 @@ class BathroomDetails extends Component
     $totalRating = 0;
     $count = count($this->reviews);
     foreach ($this->reviews as $review) {
-        $totalRating += $review['rating']; // Assuming 'rating' is a field in your review
+        $totalRating += $review->rating;
     }
 
     return $count > 0 ? $totalRating / $count : 0;
@@ -97,7 +98,6 @@ public function voteReview($reviewId, $vote)
         }
     });
 
-    // No need to emit an event; the component state is updated
 }
 
 
@@ -107,6 +107,10 @@ public function getVotes($reviewId)
     $downvotes = ReviewVotes::where('review_id', $reviewId)->where('downvote', 1)->count();
 
     return compact('upvotes', 'downvotes');
+}
+public function refreshReviews()
+{
+    $this->reviews = Review::where('bathroom_id', $this->bathroomId)->get();
 }
 
 }
