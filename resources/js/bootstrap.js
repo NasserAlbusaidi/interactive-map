@@ -1,4 +1,16 @@
 import 'bootstrap';
+import Echo from 'laravel-echo';
+
+window.Pusher = require('pusher-js');
+
+
+window.Echo = new Echo({
+    broadcaster: 'pusher',
+    key: process.env.MIX_PUSHER_APP_KEY, // get this from your .env file or Pusher dashboard
+    wsHost: window.location.hostname,
+    wsPort: 6001, // or the port you have configured for websockets
+    disableStats: true,
+});
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests

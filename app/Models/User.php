@@ -47,4 +47,16 @@ class User extends Authenticatable
     {
         return $this->name;
     }
+
+    public function answers()
+    {
+        return $this->belongsToMany(Answer::class, 'user_answers')
+                    ->withPivot('question_id')
+                    ->withTimestamps();
+    }
+
+    public function score()
+    {
+        return $this->hasOne(Score::class);
+    }
 }

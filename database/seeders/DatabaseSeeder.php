@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             BathroomsTableSeeder::class,
             ReviewsTableSeeder::class,
             BathroomAmenitySeeder::class,
+            QuizSeeder::class,
         ]);
     }
 }

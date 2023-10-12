@@ -31,4 +31,12 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'xirsys' => [
+        'api_path' => env('XIRSYS_API_PATH'),
+        'ident' => env('XIRSYS_IDENT'),
+        'secret' => env('XIRSYS_SECRET'),
+        'channel' => env('XIRSYS_CHANNEL'),
+    ],
+
+
 ];

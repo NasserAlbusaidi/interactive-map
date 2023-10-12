@@ -4,16 +4,8 @@
         <h3 class="text-lg font-semibold">{{ $name }}</h3>
         <p class="text-xs text-blue-300">{{ $address }}</p>
     </div>
-    @if ($image)
-        <div class="px-4 py-2">
-            <img src="{{ $image }}" alt="Bathroom Image" class="w-full h-40 object-cover rounded-md">
-        </div>
-    @else
-        <div class="px-4 py-2">
-            <img src="https://via.placeholder.com/640x360.png?text=No+Image" alt="Bathroom Image"
-                class="w-full h-40 object-cover rounded-md">
-        </div>
-    @endif
+    <livewire:photos :bathroomId="$bathroomId" />
+
     @if ($amenities)
         <div class="grid grid-cols-4 gap-2 px-4 py-2 border-t">
             <h4 class="text-md font-semibold col-span-4 mb-2">Amenities</h4>
@@ -42,11 +34,10 @@
             @if ($averageRating > 0)
                 <div class="flex items-center">
                     @for ($i = 1; $i <= 5; $i++)
-                        @if ($i <= ($averageRating))
+                        @if ($i <= floor($averageRating))
                             <i class="fas fa-star text-yellow-400"></i> <!-- Full star -->
-                        @elseif ($i <= ($averageRating * 2) / 2)
-                        aa
-                            <i class="fa-solid fa-star-sharp-half text-yellow-400"></i> <!-- Half star -->
+                        @elseif ($i == ceil($averageRating) && $averageRating - floor($averageRating) >= 0.5)
+                            <i class="fas fa-star-half-alt text-yellow-400"></i> <!-- Half star -->
                         @else
                             <i class="far fa-star text-gray-300"></i> <!-- Empty star -->
                         @endif
@@ -58,6 +49,7 @@
                     <i class="fas fa-star text-gray-300"></i> <!-- Single gray star for zero rating -->
                 </div>
             @endif
+
 
         </div>
         {{-- {{$bathroomId}} --}}
